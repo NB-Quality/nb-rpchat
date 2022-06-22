@@ -24,8 +24,7 @@ if IsDuplicityVersion() then
     end 
     local ProxDetector = function(radius, player, message, color1, color2, color3, color4, color5)
          local message = message or ""
-         local targets = GetPlayers()
-         local playerCoords = TriggerClientCallbackSynced("GetPosition",player)
+
          local farlevel1 = radius/16
          local farlevel2 = radius/8 
          local farlevel3 = radius/4
