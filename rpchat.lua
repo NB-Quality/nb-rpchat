@@ -12,6 +12,7 @@ if IsDuplicityVersion() then
     local COLOR_FADE5   = "#6E6E6E"
     local COLOR_PURPLE  = "#C2A2DA"
     local COLOR_DBLUE   = "#2641FE"
+    local COLOR_LIGHTBLUE = "#33CCFFAA"
     local COLOR_ALLDEPT = "#FF8282"
     local COLOR_NEWS    = "#FFA500"
     local COLOR_OOC     = "#E0FFFF"
@@ -160,7 +161,13 @@ if IsDuplicityVersion() then
         local message = message or ""
         local sendername = GetPlayerName(player)
 		local string = _U("me", sendername, message) 
-        ProxDetector(30.0,player,string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,nil,1)
+        ProxDetector(30.0,player,string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE)
+    end 
+    Chat["do"] = function(player,message)
+        local message = message or ""
+        local sendername = GetPlayerName(player)
+		local string = _U("do", sendername, message) 
+        ProxDetector(30.0,player,string,COLOR_LIGHTBLUE,COLOR_LIGHTBLUE,COLOR_LIGHTBLUE,COLOR_LIGHTBLUE,COLOR_LIGHTBLUE)
     end 
     Chat["ooc"] = function(player,message)
         local message = message or ""
@@ -173,7 +180,7 @@ if IsDuplicityVersion() then
         local dice = math.random(1,6);
         local sendername = GetPlayerName(player)
 		local string = _U("dice", sendername, dice)
-		ProxDetector(5.0, player, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE, nil, 1);
+		ProxDetector(5.0, player, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
     end 
     exports["chat"]:registerMessageHook(function(player, outMessage, hookRef)
         local player = tonumber(player)
@@ -228,6 +235,10 @@ if IsDuplicityVersion() then
     
     ClientCommand["me"] = function(player,message)
         Chat["me"](player,message)
+    end 
+    
+    ClientCommand["do"] = function(player,message)
+        Chat["do"](player,message)
     end 
     
     ClientCommand["ooc"] = function(player,message)
