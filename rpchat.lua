@@ -15,6 +15,7 @@ if IsDuplicityVersion() then
     local COLOR_ALLDEPT = "#FF8282"
     local COLOR_NEWS    = "#FFA500"
     local COLOR_OOC     = "#E0FFFF"
+    local COLOR_YELLOW  = "#FFFF00"
     
     local Chat = {}
     local _U = function(str,...)
@@ -126,6 +127,35 @@ if IsDuplicityVersion() then
 		local string = _U("close", sendername, message)
         ProxDetector(3.0,player,string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5)
     end 
+    Chat["whisper"] = function(player,target,message)
+        local message = message or ""
+        if player == target then 
+            local sendername = GetPlayerName(player)
+            local string = _U("whisper_self", sendername)
+            ProxDetector(5.0,player,string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5)
+        else 
+            local sendername = GetPlayerName(player)
+            local targetname = GetPlayerName(target)
+            local message = _U("whisper_target", sendername, player, targetname)
+            local outMessage = {
+               template = '<div style="color:'..COLOR_YELLOW..';">{0}</div>',
+               multiline = true,
+               args = {message}
+            }
+            TriggerClientEvent('chat:addMessage', target, outMessage)
+            
+            local message = _U("whisper_from", targetname, target)
+            local outMessage = {
+               template = '<div style="color:'..COLOR_YELLOW..';">{0}</div>',
+               multiline = true,
+               args = {message}
+            }
+            TriggerClientEvent('chat:addMessage', player, outMessage)
+             if Config.PlayTagSound then 
+                TriggerClientEvent(resource..':playchatsound_tap',target)
+            end 
+        end 
+    end 
     Chat["me"] = function(player,message)
         local message = message or ""
         local sendername = GetPlayerName(player)
@@ -187,6 +217,15 @@ if IsDuplicityVersion() then
     end 
     ClientCommand["c"] = ClientCommand["close"]
     
+    ClientCommand["whisper"] = function(player,target,message)
+        local player = tonumber(player)
+        if GetPlayerEndpoint(target) then 
+            local target = tonumber(target)
+            Chat["whisper"](player,target,message)
+        end 
+    end 
+    ClientCommand["w"] = ClientCommand["whisper"]
+    
     ClientCommand["me"] = function(player,message)
         Chat["me"](player,message)
     end 
@@ -199,16 +238,7 @@ if IsDuplicityVersion() then
     ClientCommand["dice"] = function(player,message)
         Chat["dice"](player)
     end 
-    ClientCommand["test"] = function(source,message)
-        local message = message or ""
-        local player = tonumber(source)
-        local sendername = GetPlayerName(player)
-        local str = string.format("(( %s: %s ))", sendername, message)
-        exports["nb-rpchat"]:ProxDetector(30.0,player,str,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5)
-        local newsmessage = string.format("NR %s: %s ", sendername, message)
-        exports["nb-rpchat"]:OOCOff(COLOR_NEWS,newsmessage)
-    end 
-    
+ 
     exports("ProxDetector",ProxDetector)
     exports("OOCOff",OOCOff)
 else 
