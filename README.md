@@ -1,6 +1,10 @@
 # nb-chat
 SA-MP Style Chat
 
+## Tap sounds 
+You can turn it off in config.lua 
+
+
 ## colors format 
 ```
     local COLOR_WHITE   = "#FFFFFF"
