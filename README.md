@@ -51,4 +51,4 @@ RegisterNetEvent("serverside:something",function(message)
 end)
 ```
 
-![20220622230821|613x500](upload://svzCghYTrfWJelVEGIML3ZCruKL.png)
+
