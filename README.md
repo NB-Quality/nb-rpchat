@@ -51,4 +51,5 @@ RegisterNetEvent("serverside:something",function(message)
 end)
 ```
 
+![preview](https://github.com/negbook/nb-rpchat/blob/main/preview.png?raw=true)
 
