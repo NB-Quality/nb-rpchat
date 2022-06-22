@@ -9,7 +9,7 @@ Config.Locales = {
     ['whisper_self'] = "* %s mutters somthing.",
     ['whisper_target'] = "%s(ID: %d) whispers: %s",
     ['whisper_from'] = "Wisper sent to %s(ID: %d).",
-    ['local'] = "* %s Says: %s",
+    ['local'] = "%s Says: %s",
     ['b'] = "* %s Says: (( %s ))",
     ['shout'] = "* %s Shouts: %s",
 }
