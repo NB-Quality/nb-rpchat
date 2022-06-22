@@ -1,9 +1,20 @@
 # nb-chat
-SA-MP Style Chat
+SA-MP Style Chat with clean codes and classic sa-mp coding style.
 
 ## Tap sounds 
 You can turn it off in config.lua 
 
+## Features
+```
+/ooc /o text
+/close /c  text
+/me text
+/whisper id text
+/local /l text
+/b text --local ooc
+/shout text
+/do text
+```
 
 ## colors format 
 ```
@@ -39,3 +50,5 @@ RegisterNetEvent("serverside:something",function(message)
     exports["nb-rpchat"]:OOCOff(COLOR_NEWS,newsmessage)
 end)
 ```
+
+![20220622230821|613x500](upload://svzCghYTrfWJelVEGIML3ZCruKL.png)
