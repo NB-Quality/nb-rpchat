@@ -195,7 +195,10 @@ if IsDuplicityVersion() then
                     multiline = true,
                     args = {message}
                 }
-                hookRef.updateMessage(outMessage)
+                --hookRef.updateMessage(outMessage)
+                hookRef.cancel() 
+                TriggerClientEvent('chat:addMessage', player, outMessage)
+                
             else 
                 hookRef.cancel() 
                 Chat["local"](player,message)
