@@ -207,51 +207,36 @@ if IsDuplicityVersion() then
         
     end) 
     -- Register Commands 
-    ClientCommand["local"] = function(player,message)
-        Chat["local"](player,message)
+    local cmdsays = {
+        {"local","l"},
+        {"shout","s"},
+        {"b"},
+        {"close","c"},
+        {"me"},
+        {"do"},
+        {"ooc","o"},
+        {"dice"}
+    }
+    for i=1,#cmdsays do 
+        local v = cmdsays[i]
+        local m,n = v[1],v[2]
+         
+        ClientCommand[m] = function(player,...)
+           
+            Chat[m](player,table.concat({...}," "))
+        end 
+        if n then ClientCommand[n] = ClientCommand[m] end 
     end 
-    ClientCommand["l"] = ClientCommand["local"]
     
-    ClientCommand["shout"] = function(player,message)
-        Chat["shout"](player,message)
-    end 
-    ClientCommand["s"] = ClientCommand["shout"]
-    
-    ClientCommand["b"] = function(player,message)
-        Chat["b"](player,message)
-    end 
-    
-    ClientCommand["close"] = function(player,message)
-        Chat["close"](player,message)
-    end 
-    ClientCommand["c"] = ClientCommand["close"]
-    
-    ClientCommand["whisper"] = function(player,target,message)
+    ClientCommand["whisper"] = function(player,target,...)
         local player = tonumber(player)
         if GetPlayerEndpoint(target) then 
             local target = tonumber(target)
-            Chat["whisper"](player,target,message)
+            Chat["whisper"](player,target,table.concat({...}," "))
         end 
     end 
     ClientCommand["w"] = ClientCommand["whisper"]
-    
-    ClientCommand["me"] = function(player,message)
-        Chat["me"](player,message)
-    end 
-    
-    ClientCommand["do"] = function(player,message)
-        Chat["do"](player,message)
-    end 
-    
-    ClientCommand["ooc"] = function(player,message)
-        Chat["ooc"](player,message)
-    end 
-    ClientCommand["o"] = ClientCommand["ooc"]
-    
-    ClientCommand["dice"] = function(player,message)
-        Chat["dice"](player)
-    end 
- 
+
     exports("ProxDetector",ProxDetector)
     exports("OOCOff",OOCOff)
 else 
