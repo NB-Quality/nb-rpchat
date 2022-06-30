@@ -136,19 +136,19 @@ if IsDuplicityVersion() then
         else 
             local sendername = GetPlayerName(player)
             local targetname = GetPlayerName(target)
-            local message = _U("whisper_target", sendername, player, targetname)
+            local msg = _U("whisper_target", sendername, player, message)
             local outMessage = {
                template = '<div style="color:'..COLOR_YELLOW..';">{0}</div>',
                multiline = true,
-               args = {message}
+               args = {msg}
             }
             TriggerClientEvent('chat:addMessage', target, outMessage)
             
-            local message = _U("whisper_from", targetname, target)
+            local msg = _U("whisper_from", targetname, target)
             local outMessage = {
                template = '<div style="color:'..COLOR_YELLOW..';">{0}</div>',
                multiline = true,
-               args = {message}
+               args = {msg}
             }
             TriggerClientEvent('chat:addMessage', player, outMessage)
              if Config.PlayTagSound then 
